@@ -1,0 +1,15 @@
+# Local credentials, uploaded files, and runtime data
+.env
+.env.*
+!.env.example
+.local-data/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/

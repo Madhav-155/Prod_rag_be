@@ -1,0 +1,21 @@
+name: prod-rag
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: ${RAG_DATABASE_NAME:-rag}
+      POSTGRES_USER: ${RAG_DATABASE_USER:-rag}
+      POSTGRES_PASSWORD: ${RAG_DATABASE_PASSWORD:?Set RAG_DATABASE_PASSWORD in rag_BE/.env}
+    ports:
+      - '127.0.0.1:${RAG_DATABASE_PORT:-55432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
