@@ -27,7 +27,7 @@ is still pending. Synthetic templates are not accuracy results.
 
 Implemented:
 
-- An installable Python package under `src/rag_backend`.
+- An installable Python package whose modules live directly under `src`.
 - A FastAPI application factory and separate health router.
 - Validated settings loaded from this directory's `.env` and environment variables.
 - PostgreSQL connections with bounded connection, pool and statement timeouts.
@@ -40,7 +40,7 @@ Why these choices:
 | Choice | Reason |
 | --- | --- |
 | One package, separate modules | The API and later worker share the same business logic. |
-| src layout | Tests exercise the installed package, reducing accidental imports from the working directory. |
+| src layout | Tests exercise the installed package, reducing accidental imports from the working directory. Setuptools maps `rag_backend` to `src`. |
 | Application factory | Tests can supply settings without changing process-wide state. |
 | PostgreSQL plus pgvector | Original evidence, versions, jobs, full-text search and vectors can share transactions. |
 | Explicit migrations | Starting the API does not silently change the database. |

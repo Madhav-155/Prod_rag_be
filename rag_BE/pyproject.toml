@@ -27,8 +27,27 @@ dependencies = [
 [project.optional-dependencies]
 dev = ['pytest>=8,<10', 'httpx>=0.28,<1', 'ruff>=0.9,<1', 'reportlab>=4,<5']
 
-[tool.setuptools.packages.find]
-where = ['src']
+[tool.setuptools]
+packages = [
+  'rag_backend',
+  'rag_backend.answering',
+  'rag_backend.api',
+  'rag_backend.api.routes',
+  'rag_backend.api.schemas',
+  'rag_backend.conversations',
+  'rag_backend.domain',
+  'rag_backend.evaluation',
+  'rag_backend.indexing',
+  'rag_backend.ingestion',
+  'rag_backend.ingestion.parsers',
+  'rag_backend.jobs',
+  'rag_backend.retrieval',
+  'rag_backend.storage',
+  'rag_backend.storage.repositories',
+]
+
+[tool.setuptools.package-dir]
+rag_backend = 'src'
 
 [tool.pytest.ini_options]
 testpaths = ['tests']
@@ -41,6 +60,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ['E', 'F', 'I', 'UP', 'B']
+
+[tool.ruff.lint.isort]
+known-first-party = ['rag_backend']
 
 [tool.ruff.format]
 quote-style = 'single'
